@@ -7,8 +7,6 @@ require_relative "../models/database_connection"
 class Websocket
   attr_reader :app, :clients
 
-  KEEPALIVE_TIME = 2 # seconds
-
   def initialize(app)
     @app     = app
     @clients = []
@@ -17,7 +15,7 @@ class Websocket
 
   def call(env)
     if Faye::WebSocket.websocket?(env)
-      ws = Faye::WebSocket.new(env, nil, { ping: KEEPALIVE_TIME })
+      ws = Faye::WebSocket.new(env, nil, { ping: 1 })
 
       # Save client when new websocket connection is established
       ws.on(:open) { |event| clients << ws }

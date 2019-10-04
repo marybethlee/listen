@@ -1,21 +1,23 @@
-<h1>Listen & Notify</h1>
+<div class="body">
+  <h1>Listen & Notify</h1>
 
-<span>This is a test application for the purposes of exploring the listen and notify functionality of PostgreSQL</span>
+  <span>This is a test application for the purposes of exploring the listen and notify functionality of PostgreSQL</span>
 
-<form id="comment-form" action="/comments" method="post">
-  <input type="text" id="body" name="comment[body]" >
-  <button type="submit">Add Comment</button>
-</form>
+  <form id="comment-form" action="/comments" method="post">
+    <input type="text" id="body" name="comment[body]" >
+    <button type="submit">Add Comment</button>
+  </form>
 
-<% if comments.any? %>
-  <h3>Previous Comments</h3>
+  <% if comments.any? %>
+    <h3>Previous Comments</h3>
 
-  <div id="chat-log">
-    <% comments.each do |comment| %>
-      <p><%= comment.body %></p>
-    <% end %>
-  </div>
-<% end %>
+    <div id="chat-log">
+      <% comments.each do |comment| %>
+        <p><%= comment.body %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <script>
   // Websockets logic
@@ -46,3 +48,26 @@
   });
 </script>
 
+<style>
+  .body {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  h1 { text-align: center; }
+
+  form {
+    padding: 20px 0;
+    margin: 0;
+    display: flex;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  button { padding: 10px; }
+</style>

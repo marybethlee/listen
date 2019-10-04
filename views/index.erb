@@ -1,0 +1,48 @@
+<h1>Listen & Notify</h1>
+
+<span>This is a test application for the purposes of exploring the listen and notify functionality of PostgreSQL</span>
+
+<form id="comment-form" action="/comments" method="post">
+  <input type="text" id="body" name="comment[body]" >
+  <button type="submit">Add Comment</button>
+</form>
+
+<% if comments.any? %>
+  <h3>Previous Comments</h3>
+
+  <div id="chat-log">
+    <% comments.each do |comment| %>
+      <p><%= comment.body %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<script>
+  // Websockets logic
+  var scheme = window.location.protocol === "https:" ? "wss://" : "ws://";
+  var uri    = scheme + window.document.location.host + "/";
+  var socket = new WebSocket(uri);
+
+  socket.onmessage = function (event) {
+    var newComment = document.createElement("P");
+    var text = document.createTextNode(event.data);
+    newComment.appendChild(text);
+
+    var chatLog = document.getElementById("chat-log");
+    chatLog.insertBefore(newComment, chatLog.childNodes[0]);
+  }
+
+  // Submit comment form via JS
+  var form = document.getElementById("comment-form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var XHR = new XMLHttpRequest();
+    var FD = new FormData(form);
+    var url = window.location.href + '/comments'
+
+    XHR.open('POST', url);
+    XHR.send(FD);
+    form.reset();
+  });
+</script>
+

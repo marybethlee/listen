@@ -1,0 +1,43 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    eventmachine (1.2.7)
+    faye-websocket (0.10.9)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
+    mustermann (1.0.3)
+    nio4r (2.5.2)
+    pg (1.1.4)
+    puma (4.2.0)
+      nio4r (~> 2.0)
+    rack (2.0.7)
+    rack-protection (2.0.7)
+      rack
+    rake (13.0.0)
+    sequel (5.24.0)
+    sinatra (2.0.7)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.7)
+      tilt (~> 2.0)
+    tilt (2.0.9)
+    websocket-driver (0.7.1)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  faye-websocket
+  pg
+  puma
+  rake
+  sequel
+  sinatra
+
+RUBY VERSION
+   ruby 2.6.4p104
+
+BUNDLED WITH
+   1.17.3

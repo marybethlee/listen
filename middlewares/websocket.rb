@@ -15,22 +15,22 @@ class Websocket
 
   def call(env)
     if Faye::WebSocket.websocket?(env)
-      ws = Faye::WebSocket.new(env, nil, { ping: 1 })
+      socket = Faye::WebSocket.new(env, nil, { ping: 1 })
 
       # Save client when new websocket connection is established
-      ws.on(:open) { |event| clients << ws }
+      socket.on(:open) { |event| clients << socket }
 
       # Code goes here if we want to listen for messages from the clients
-      ws.on(:message) {}
+      socket.on(:message) {}
 
       # Clear client from clients list when websocket connection is closed
-      ws.on :close do |event|
-        clients.delete(ws)
-        ws = nil
+      socket.on :close do |event|
+        clients.delete(socket)
+        socket = nil
       end
 
       # Return async Rack response
-      ws.rack_response
+      socket.rack_response
     else
       app.call(env)
     end

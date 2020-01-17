@@ -1,7 +1,8 @@
 require "sequel"
 
 class DatabaseConnection
-  DB = Sequel.connect(ENV["DATABASE_URL"] || "postgres://localhost:5432/listen_development")
+  DATABASE_URL = ENV.fetch("DATABASE_URL", "postgres://localhost:5432/listen_development")
+  DB = Sequel.connect(DATABASE_URL)
 
   def self.listen(&block)
     DB.listen('comments', loop: true) do |_channel, _pid, event_data|

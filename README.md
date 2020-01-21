@@ -12,7 +12,7 @@ Next, create your database:
 createdb listen_development
 ```
 
-From there, you can run `rake db:migrate` to create a comments table, and set up the trigger to listen for insertions to the comments database and send information to  using the `notify` function.
+From there, you can run `rake db:migrate` to create a comments table, and set up the trigger to listen for insertions to the comments table and send information to  using the `notify` function.
 
 ### Running the application
 

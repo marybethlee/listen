@@ -7,7 +7,7 @@ class DatabaseConnection
   def self.listen(&block)
     DB.listen('comments', loop: true) do |_channel, _pid, event_data|
       data = JSON.parse(event_data)
-      yield data.dig("record", "body")
+      yield data.dig("body")
     end
   end
 end

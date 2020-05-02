@@ -7,13 +7,9 @@ Sequel.migration do
       begin
         perform pg_notify(
           'comments',
-          json_build_object(
-            'event', TG_OP,
-            'record', row_to_json(NEW)
-          )::text
+          row_to_json(NEW)::text
         );
-
-        return NEW;
+        return null;
       end;
 
       $$ language plpgsql;
